@@ -1,1 +1,137 @@
-Hello World1
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Tournament Data</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Submit Tournament Data</h1>
+    <form id="tournamentForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="UAT" required>
+
+        <label for="slug">Slug:
+            <span class="tooltip">?
+                    <span class="tooltiptext">Usually a simplified name, 3-5 characters</span>
+                </span>
+        </label>
+        <input type="text" id="slug" name="slug" value="uat" required>
+
+        <label for="tournamentId">Tournament ID:</label>
+        <input type="text" id="tournamentId" name="tournamentId" value="ua-24-25" required>
+
+        <h2>Players</h2>
+
+        <div class="player" id="player1">
+            <h3>Player 1</h3>
+            <label for="player1Name">Name:</label>
+            <input type="text" id="player1Name" name="player1Name" value="Roman" required>
+            <label for="player1Slug">Slug:
+                <span class="tooltip">?
+                        <span class="tooltiptext">Usually a simplified name, 3-5 characters</span>
+                    </span>
+            </label>
+            <input type="text" id="player1Slug" name="player1Slug" value="roman" required>
+            <label for="player1FplId">FPL ID:</label>
+            <input type="text" id="player1FplId" name="player1FplId" value="2616" required>
+        </div>
+
+        <div class="player" id="player2">
+            <h3>Player 2</h3>
+            <label for="player2Name">Name:</label>
+            <input type="text" id="player2Name" name="player2Name" required>
+            <label for="player2Slug">Slug:
+                <span class="tooltip">?
+                        <span class="tooltiptext">Usually a simplified name, 3-5 characters</span>
+                    </span>
+            </label>
+            <input type="text" id="player2Slug" name="player2Slug" required>
+            <label for="player2FplId">FPL ID:</label>
+            <input type="text" id="player2FplId" name="player2FplId" required>
+        </div>
+
+        <div class="player" id="player3">
+            <h3>Player 3</h3>
+            <label for="player3Name">Name:</label>
+            <input type="text" id="player3Name" name="player3Name" required>
+            <label for="player3Slug">Slug:
+                <span class="tooltip">?
+                        <span class="tooltiptext">Usually a simplified name, 3-5 characters</span>
+                    </span>
+            </label>
+            <input type="text" id="player3Slug" name="player3Slug" required>
+            <label for="player3FplId">FPL ID:</label>
+            <input type="text" id="player3FplId" name="player3FplId" required>
+        </div>
+
+        <div class="player" id="player4">
+            <h3>Player 4</h3>
+            <label for="player4Name">Name:</label>
+            <input type="text" id="player4Name" name="player4Name" required>
+            <label for="player4Slug">Slug:
+                <span class="tooltip">?
+                        <span class="tooltiptext">Usually a simplified name, 3-5 characters</span>
+                    </span>
+            </label>
+            <input type="text" id="player4Slug" name="player4Slug" required>
+            <label for="player4FplId">FPL ID:</label>
+            <input type="text" id="player4FplId" name="player4FplId" required>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('tournamentForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const data = {
+            name: document.getElementById('name').value,
+            slug: document.getElementById('slug').value,
+            tournamentId: document.getElementById('tournamentId').value,
+            players: [
+                {
+                    name: document.getElementById('player1Name').value,
+                    slug: document.getElementById('player1Slug').value,
+                    fplId: document.getElementById('player1FplId').value
+                },
+                {
+                    name: document.getElementById('player2Name').value,
+                    slug: document.getElementById('player2Slug').value,
+                    fplId: document.getElementById('player2FplId').value
+                },
+                {
+                    name: document.getElementById('player3Name').value,
+                    slug: document.getElementById('player3Slug').value,
+                    fplId: document.getElementById('player3FplId').value
+                },
+                {
+                    name: document.getElementById('player4Name').value,
+                    slug: document.getElementById('player4Slug').value,
+                    fplId: document.getElementById('player4FplId').value
+                }
+            ]
+        };
+
+        fetch('YOUR_SERVER_URL_HERE', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    });
+</script>
+</body>
+</html>
